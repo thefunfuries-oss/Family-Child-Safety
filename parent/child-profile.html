@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="View and manage your child's family safety profile."
+    >
+
+    <title>Child Profile | Family Child Safety</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        /* =========================================
+           CHILD PROFILE PAGE
+        ========================================= */
+
+        .profile-page {
+            max-width: 1100px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           PROFILE HERO
+        ========================================= */
+
+        .profile-hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background: var(--white);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-identity {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .profile-avatar {
+            width: 82px;
+            height: 82px;
+
+            flex: 0 0 82px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 22px;
+
+            color: var(--primary-dark);
+            background: var(--primary-light);
+
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .profile-identity h2 {
+            margin-bottom: 5px;
+
+            font-size: 27px;
+        }
+
+        .profile-identity p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           STATUS
+        ========================================= */
+
+        .profile-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 14px;
+
+            border-radius: 100px;
+
+            color: #8a5a00;
+            background: #fff6df;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .profile-status.connected {
+            color: #14652e;
+            background: #e9f8ed;
+        }
+
+        .profile-status.offline {
+            color: #536158;
+            background: #eef2ef;
+        }
+
+
+        /* =========================================
+           CONTENT GRID
+        ========================================= */
+
+        .profile-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.5fr)
+                minmax(280px, .8fr);
+
+            gap: 22px;
+        }
+
+        .profile-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            background: var(--white);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-card h3 {
+            margin-bottom: 5px;
+
+            font-size: 18px;
+        }
+
+        .profile-card-subtitle {
+            margin-bottom: 22px;
+
+            color: var(--text-light);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           DETAILS
+        ========================================= */
+
+        .details-list {
+            display: grid;
+            gap: 0;
+        }
+
+        .profile-detail {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-detail:last-child {
+            border-bottom: 0;
+        }
+
+        .profile-detail-label {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .profile-detail-value {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+
+        /* =========================================
+           SAFETY SETTINGS
+        ========================================= */
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 16px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: 0;
+        }
+
+        .setting-info strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            font-size: 14px;
+        }
+
+        .setting-info span {
+            display: block;
+
+            color: var(--text-light);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .setting-badge {
+            padding: 6px 10px;
+
+            border-radius: 100px;
+
+            color: #657269;
+            background: #eef2ef;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .setting-badge.pending {
+            color: #8a5a00;
+            background: #fff6df;
+        }
+
+
+        /* =========================================
+           PAIRING CARD
+        ========================================= */
+
+        .pairing-card {
+            margin-top: 22px;
+
+            padding: 22px;
+
+            border: 1px solid #cfe5d5;
+            border-radius: 16px;
+
+            background: #f5fbf7;
+        }
+
+        .pairing-card h4 {
+            margin-bottom: 6px;
+
+            font-size: 16px;
+        }
+
+        .pairing-card p {
+            margin-bottom: 17px;
+
+            color: var(--text-light);
+
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           ACTIONS
+        ========================================= */
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 22px;
+        }
+
+        .profile-actions .btn {
+            flex: 1;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .page-loading {
+            padding: 90px 20px;
+
+            text-align: center;
+
+            color: var(--text-light);
+        }
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .page-error {
+            max-width: 600px;
+
+            padding: 45px 25px;
+
+            margin: 50px auto;
+
+            text-align: center;
+
+            border: 1px solid #f1d1d4;
+            border-radius: 20px;
+
+            background: #fff8f8;
+        }
+
+        .page-error h2 {
+            margin-bottom: 8px;
+
+            color: #9f202b;
+        }
+
+        .page-error p {
+            margin-bottom: 20px;
+
+            color: var(--text-light);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-hero {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .profile-identity {
+                align-items: flex-start;
+            }
+
+            .profile-avatar {
+                width: 65px;
+                height: 65px;
+                flex-basis: 65px;
+
+                border-radius: 18px;
+
+                font-size: 24px;
+            }
+
+            .profile-identity h2 {
+                font-size: 22px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .profile-detail {
+                align-items: flex-start;
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+            .profile-detail-value {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body class="dashboard-layout">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="dashboard-sidebar">
+
+        <div
+            class="logo"
+            style="color:white; margin-bottom:35px;"
+        >
+
+            <div class="logo-icon">
+                F
+            </div>
+
+            <span>
+                Family Child Safety
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <ul
+                style="
+                    list-style:none;
+                    display:grid;
+                    gap:8px;
+                "
+            >
+
+                <li>
+                    <a
+                        href="dashboard.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="children.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            background:rgba(255,255,255,0.10);
+                            color:white;
+                            font-weight:700;
+                        "
+                    >
+                        My Children
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="dashboard.html#location"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Location
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="dashboard.html#alerts"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Safety Alerts
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="dashboard.html#settings"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div
+            style="
+                position:absolute;
+                bottom:25px;
+                left:18px;
+                right:18px;
+            "
+        >
+
+            <button
+                id="logoutButton"
+                class="btn btn-outline btn-block"
+                style="
+                    color:white;
+                    border-color:rgba(255,255,255,0.20);
+                    background:transparent;
+                "
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-topbar">
+
+            <div class="dashboard-title">
+
+                <h1>
+                    Child Profile
+                </h1>
+
+                <p>
+                    View your child's family safety information.
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    gap:12px;
+                "
+            >
+
+                <div
+                    class="avatar"
+                    id="parentAvatar"
+                >
+                    P
+                </div>
+
+                <div>
+
+                    <div
+                        id="parentName"
+                        style="font-weight:700;"
+                    >
+                        Parent
+                    </div>
+
+                    <div
+                        id="parentEmail"
+                        style="
+                            color:#617067;
+                            font-size:12px;
+                        "
+                    >
+                        Account
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="profile-page">
+
+            <a
+                href="children.html"
+                class="back-link"
+            >
+                ← Back to My Children
+            </a>
+
+
+            <!-- =====================================
+                 LOADING
+            ====================================== -->
+
+            <div
+                id="loadingState"
+                class="page-loading"
+            >
+                Loading child profile...
+            </div>
+
+
+            <!-- =====================================
+                 ERROR
+            ====================================== -->
+
+            <div
+                id="errorState"
+                class="page-error"
+                style="display:none;"
+            >
+
+                <h2>
+                    Child profile unavailable
+                </h2>
+
+                <p id="errorMessage">
+                    We could not load this child profile.
+                </p>
+
+                <a
+                    href="children.html"
+                    class="btn btn-primary"
+                >
+                    Back to My Children
+                </a>
+
+            </div>
+
+
+            <!-- =====================================
+                 PROFILE
+            ====================================== -->
+
+            <div
+                id="profileContent"
+                style="display:none;"
+            >
+
+
+                <div class="profile-hero">
+
+
+                    <div class="profile-identity">
+
+                        <div
+                            id="childAvatar"
+                            class="profile-avatar"
+                        >
+                            C
+                        </div>
+
+
+                        <div>
+
+                            <h2 id="childName">
+                                Child
+                            </h2>
+
+                            <p id="childAge">
+                                Age not specified
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="connectionStatus"
+                        class="profile-status"
+                    >
+                        ● Not paired
+                    </div>
+
+
+                </div>
+
+
+                <div class="profile-grid">
+
+
+                    <!-- =================================
+                         DETAILS
+                    ================================== -->
+
+                    <div class="profile-card">
+
+                        <h3>
+                            Child Information
+                        </h3>
+
+                        <p class="profile-card-subtitle">
+                            Basic information saved by the parent.
+                        </p>
+
+
+                        <div class="details-list">
+
+
+                            <div class="profile-detail">
+
+                                <span class="profile-detail-label">
+                                    Full Name
+                                </span>
+
+                                <span
+                                    id="detailName"
+                                    class="profile-detail-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span class="profile-detail-label">
+                                    Age
+                                </span>
+
+                                <span
+                                    id="detailAge"
+                                    class="profile-detail-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span class="profile-detail-label">
+                                    Gender
+                                </span>
+
+                                <span
+                                    id="detailGender"
+                                    class="profile-detail-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span class="profile-detail-label">
+                                    Profile Status
+                                </span>
+
+                                <span
+                                    id="detailStatus"
+                                    class="profile-detail-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span class="profile-detail-label">
+                                    Parent Note
+                                </span>
+
+                                <span
+                                    id="detailNote"
+                                    class="profile-detail-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================
+                         SAFETY
+                    ================================== -->
+
+                    <div class="profile-card">
+
+                        <h3>
+                            Safety & Connection
+                        </h3>
+
+                        <p class="profile-card-subtitle">
+                            Current family safety connection status.
+                        </p>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Device Connection
+                                </strong>
+
+                                <span>
+                                    Child device pairing status.
+                                </span>
+
+                            </div>
+
+                            <span
+                                id="deviceStatus"
+                                class="setting-badge pending"
+                            >
+                                Not paired
+                            </span>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Location Sharing
+                                </strong>
+
+                                <span>
+                                    Requires device permission and pairing.
+                                </span>
+
+                            </div>
+
+                            <span
+                                id="locationStatus"
+                                class="setting-badge"
+                            >
+                                Disabled
+                            </span>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Safety Alerts
+                                </strong>
+
+                                <span>
+                                    Family safety notifications.
+                                </span>
+
+                            </div>
+
+                            <span class="setting-badge">
+                                Ready
+                            </span>
+
+                        </div>
+
+
+                        <div class="pairing-card">
+
+                            <h4>
+                                Connect a Device
+                            </h4>
+
+                            <p>
+                                Device pairing will be available after
+                                the child profile is created. Pairing will
+                                require appropriate consent and device
+                                permissions.
+                            </p>
+
+                            <button
+                                id="pairButton"
+                                class="btn btn-primary btn-block"
+                                type="button"
+                                disabled
+                            >
+                                Pair Child Device
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="profile-actions">
+
+                    <button
+                        id="editProfileButton"
+                        class="btn btn-outline"
+                        type="button"
+                        disabled
+                    >
+                        Edit Profile
+                    </button>
+
+
+                    <a
+                        href="children.html"
+                        class="btn btn-primary"
+                    >
+                        Back to Children
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         FIREBASE
+    ========================================== -->
+
+    <script type="module">
+
+        import {
+            auth,
+            db
+        } from "../js/firebase-config.js";
+
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+        import {
+            doc,
+            getDoc
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================== */
+
+        const parentName =
+            document.getElementById("parentName");
+
+        const parentEmail =
+            document.getElementById("parentEmail");
+
+        const parentAvatar =
+            document.getElementById("parentAvatar");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const loadingState =
+            document.getElementById("loadingState");
+
+        const errorState =
+            document.getElementById("errorState");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const profileContent =
+            document.getElementById("profileContent");
+
+        const childAvatar =
+            document.getElementById("childAvatar");
+
+        const childName =
+            document.getElementById("childName");
+
+        const childAge =
+            document.getElementById("childAge");
+
+        const connectionStatus =
+            document.getElementById("connectionStatus");
+
+        const detailName =
+            document.getElementById("detailName");
+
+        const detailAge =
+            document.getElementById("detailAge");
+
+        const detailGender =
+            document.getElementById("detailGender");
+
+        const detailStatus =
+            document.getElementById("detailStatus");
+
+        const detailNote =
+            document.getElementById("detailNote");
+
+        const deviceStatus =
+            document.getElementById("deviceStatus");
+
+        const locationStatus =
+            document.getElementById("locationStatus");
+
+
+        /* =========================================
+           GET CHILD ID FROM URL
+        ========================================== */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const childId =
+            params.get("id");
+
+
+        /* =========================================
+           AUTH
+        ========================================== */
+
+        onAuthStateChanged(
+            auth,
+            async function(user) {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                parentName.textContent =
+                    user.displayName ||
+                    "Parent";
+
+                parentEmail.textContent =
+                    user.email ||
+                    "";
+
+                parentAvatar.textContent =
+                    (
+                        user.displayName ||
+                        "P"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
+
+
+                if (!childId) {
+
+                    showError(
+                        "No child profile was selected."
+                    );
+
+                    return;
+
+                }
+
+
+                await loadChildProfile(
+                    user.uid,
+                    childId
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           LOAD CHILD
+        ========================================== */
+
+        async function loadChildProfile(
+            parentUid,
+            childId
+        ) {
+
+            try {
+
+                const childRef =
+                    doc(
+                        db,
+                        "parents",
+                        parentUid,
+                        "children",
+                        childId
+                    );
+
+
+                const snapshot =
+                    await getDoc(childRef);
+
+
+                if (!snapshot.exists()) {
+
+                    showError(
+                        "This child profile does not exist or is no longer available."
+                    );
+
+                    return;
+
+                }
+
+
+                const child =
+                    snapshot.data();
+
+
+                renderChildProfile(
+                    child
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Child profile error:",
+                    error
+                );
+
+
+                showError(
+                    "Unable to load the child profile. Please check your connection and Firestore permissions."
+                );
+
+            }
+
+        }
+
+
+        /* =========================================
+           RENDER PROFILE
+        ========================================== */
+
+        function renderChildProfile(
+            child
+        ) {
+
+            const name =
+                child.name ||
+                "Child";
+
+
+            const age =
+                child.age ||
+                "";
+
+
+            const gender =
+                formatGender(
+                    child.gender
+                );
+
+
+            const status =
+                child.connectionStatus ||
+                "pending";
+
+
+            const statusText =
+                formatStatus(
+                    status
+                );
+
+
+            childName.textContent =
+                name;
+
+
+            childAge.textContent =
+                age
+                    ? `${age} years old`
+                    : "Age not specified";
+
+
+            childAvatar.textContent =
+                name
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            detailName.textContent =
+                name;
+
+
+            detailAge.textContent =
+                age
+                    ? `${age} years`
+                    : "Not specified";
+
+
+            detailGender.textContent =
+                gender;
+
+
+            detailStatus.textContent =
+                statusText;
+
+
+            detailNote.textContent =
+                child.note ||
+                "No note added";
+
+
+            connectionStatus.textContent =
+                `● ${statusText}`;
+
+
+            connectionStatus.className =
+                "profile-status";
+
+
+            if (
+                status ===
+                "connected"
+            ) {
+
+                connectionStatus.classList.add(
+                    "connected"
+                );
+
+            }
+
+
+            if (
+                status ===
+                "offline"
+            ) {
+
+                connectionStatus.classList.add(
+                    "offline"
+                );
+
+            }
+
+
+            deviceStatus.textContent =
+                statusText;
+
+
+            deviceStatus.className =
+                "setting-badge";
+
+
+            if (
+                status ===
+                "pending"
+            ) {
+
+                deviceStatus.classList.add(
+                    "pending"
+                );
+
+            }
+
+
+            const locationSharing =
+                child.locationSharing === true;
+
+
+            locationStatus.textContent =
+                locationSharing
+                    ? "Enabled"
+                    : "Disabled";
+
+
+            if (
+                locationSharing
+            ) {
+
+                locationStatus.classList.add(
+                    "pending"
+                );
+
+            }
+
+
+            loadingState.style.display =
+                "none";
+
+
+            profileContent.style.display =
+                "block";
+
+        }
+
+
+        /* =========================================
+           ERROR
+        ========================================== */
+
+        function showError(
+            message
+        ) {
+
+            loadingState.style.display =
+                "none";
+
+            profileContent.style.display =
+                "none";
+
+            errorState.style.display =
+                "block";
+
+            errorMessage.textContent =
+                message;
+
+        }
+
+
+        /* =========================================
+           HELPERS
+        ========================================== */
+
+        function formatGender(
+            gender
+        ) {
+
+            const values = {
+
+                male:
+                    "Male",
+
+                female:
+                    "Female",
+
+                other:
+                    "Other",
+
+                prefer_not_to_say:
+                    "Prefer not to say"
+
+            };
+
+
+            return (
+                values[gender] ||
+                "Not specified"
+            );
+
+        }
+
+
+        function formatStatus(
+            status
+        ) {
+
+            const values = {
+
+                pending:
+                    "Not paired",
+
+                connected:
+                    "Connected",
+
+                offline:
+                    "Offline"
+
+            };
+
+
+            return (
+                values[status] ||
+                "Not paired"
+            );
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================== */
+
+        logoutButton.addEventListener(
+            "click",
+            async function() {
+
+                logoutButton.disabled =
+                    true;
+
+                logoutButton.textContent =
+                    "Signing Out...";
+
+
+                try {
+
+                    await signOut(
+                        auth
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Logout error:",
+                        error
+                    );
+
+
+                    logoutButton.disabled =
+                        false;
+
+                    logoutButton.textContent =
+                        "Sign Out";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
