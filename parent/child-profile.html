@@ -931,14 +931,19 @@
                                 permissions.
                             </p>
 
-                            <button
+                            <a
                                 id="pairButton"
                                 class="btn btn-primary btn-block"
-                                type="button"
-                                disabled
+                                href="pair-device.html?id=${encodeURIComponent(childId)}"
+                            style="
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                text-decoration:none;
+                            "
                             >
                                 Pair Child Device
-                            </button>
+                            </a>
 
                         </div>
 
