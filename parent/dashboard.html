@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Family Child Safety Parent Dashboard"
+    >
+
+    <title>Parent Dashboard | Family Child Safety</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="dashboard-layout">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="dashboard-sidebar">
+
+        <div
+            class="logo"
+            style="color:white; margin-bottom:35px;"
+        >
+
+            <div class="logo-icon">
+                F
+            </div>
+
+            <span>
+                Family Child Safety
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <ul
+                style="
+                    list-style:none;
+                    display:grid;
+                    gap:8px;
+                "
+            >
+
+                <li>
+                    <a
+                        href="dashboard.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            background:rgba(255,255,255,0.10);
+                            color:white;
+                            font-weight:700;
+                        "
+                    >
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="children.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        My Children
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="#location"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Location
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="#alerts"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Safety Alerts
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="#settings"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div
+            style="
+                position:absolute;
+                bottom:25px;
+                left:18px;
+                right:18px;
+            "
+        >
+
+            <button
+                id="logoutButton"
+                class="btn btn-outline btn-block"
+                style="
+                    color:white;
+                    border-color:rgba(255,255,255,0.20);
+                    background:transparent;
+                "
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- Topbar -->
+
+        <header class="dashboard-topbar">
+
+            <div class="dashboard-title">
+
+                <h1>
+                    Parent Dashboard
+                </h1>
+
+                <p>
+                    Welcome back. Keep your family connected and safe.
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    gap:12px;
+                "
+            >
+
+                <div
+                    class="avatar"
+                    id="parentAvatar"
+                >
+                    P
+                </div>
+
+                <div>
+
+                    <div
+                        id="parentName"
+                        style="
+                            font-weight:700;
+                        "
+                    >
+                        Parent
+                    </div>
+
+                    <div
+                        id="parentEmail"
+                        style="
+                            color:#617067;
+                            font-size:12px;
+                        "
+                    >
+                        Account
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Children
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="childrenCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Online
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="onlineCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Safety Alerts
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="alertCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Last Update
+                </div>
+
+                <div
+                    class="stat-value"
+                    style="font-size:18px;"
+                    id="lastUpdate"
+                >
+                    Not available
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CHILDREN SECTION
+        ====================================== -->
+
+        <section
+            style="
+                margin-bottom:28px;
+            "
+        >
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:space-between;
+                    gap:15px;
+                    margin-bottom:18px;
+                "
+            >
+
+                <div>
+
+                    <h2>
+                        Your Children
+                    </h2>
+
+                    <p
+                        style="
+                            color:#617067;
+                            font-size:14px;
+                        "
+                    >
+                        Manage connected family members.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="children.html"
+                    class="btn btn-primary"
+                >
+                    + Add Child
+                </a>
+
+            </div>
+
+
+            <div
+                id="childrenList"
+                style="
+                    display:grid;
+                    grid-template-columns:repeat(3,1fr);
+                    gap:18px;
+                "
+            >
+
+                <!-- Empty state -->
+
+                <div
+                    id="emptyChildren"
+                    style="
+                        grid-column:1/-1;
+                        padding:45px 25px;
+                        text-align:center;
+                        border:1px dashed #cbdacf;
+                        border-radius:18px;
+                        background:white;
+                    "
+                >
+
+                    <div
+                        style="
+                            font-size:40px;
+                            margin-bottom:12px;
+                        "
+                    >
+                        👨‍👩‍👧
+                    </div>
+
+                    <h3>
+                        No children connected yet
+                    </h3>
+
+                    <p
+                        style="
+                            color:#617067;
+                            margin:8px auto 20px;
+                            max-width:480px;
+                            font-size:14px;
+                        "
+                    >
+                        Add a child and complete the pairing process
+                        to start using family safety features.
+                    </p>
+
+                    <a
+                        href="children.html"
+                        class="btn btn-primary"
+                    >
+                        Add Your First Child
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             LOCATION
+        ====================================== -->
+
+        <section
+            id="location"
+            style="
+                margin-bottom:28px;
+            "
+        >
+
+            <div
+                style="
+                    background:white;
+                    border:1px solid #dce7df;
+                    border-radius:18px;
+                    padding:25px;
+                "
+            >
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        gap:20px;
+                        margin-bottom:20px;
+                    "
+                >
+
+                    <div>
+
+                        <h2>
+                            Family Location
+                        </h2>
+
+                        <p
+                            style="
+                                color:#617067;
+                                font-size:14px;
+                            "
+                        >
+                            Location sharing will only work after
+                            the appropriate device permission and
+                            family pairing are completed.
+                        </p>
+
+                    </div>
+
+                    <span
+                        class="status"
+                    >
+                        <span class="status-dot"></span>
+                        Secure
+                    </span>
+
+                </div>
+
+
+                <div
+                    style="
+                        min-height:220px;
+                        display:grid;
+                        place-items:center;
+                        border-radius:14px;
+                        background:#f1f7f3;
+                        color:#617067;
+                    "
+                >
+
+                    <div style="text-align:center;">
+
+                        <div
+                            style="
+                                font-size:42px;
+                                margin-bottom:10px;
+                            "
+                        >
+                            📍
+                        </div>
+
+                        <strong>
+                            Family location map
+                        </strong>
+
+                        <p
+                            style="
+                                margin-top:5px;
+                                font-size:13px;
+                            "
+                        >
+                            Map integration will be added later.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SAFETY ALERTS
+        ====================================== -->
+
+        <section
+            id="alerts"
+            style="
+                margin-bottom:28px;
+            "
+        >
+
+            <div
+                style="
+                    background:white;
+                    border:1px solid #dce7df;
+                    border-radius:18px;
+                    padding:25px;
+                "
+            >
+
+                <div style="margin-bottom:20px;">
+
+                    <h2>
+                        Safety Alerts
+                    </h2>
+
+                    <p
+                        style="
+                            color:#617067;
+                            font-size:14px;
+                        "
+                    >
+                        Important family safety notifications
+                        will appear here.
+                    </p>
+
+                </div>
+
+
+                <div
+                    style="
+                        padding:25px;
+                        text-align:center;
+                        border-radius:14px;
+                        background:#f7faf8;
+                    "
+                >
+
+                    <div
+                        style="
+                            font-size:32px;
+                            margin-bottom:8px;
+                        "
+                    >
+                        ✓
+                    </div>
+
+                    <strong>
+                        No active alerts
+                    </strong>
+
+                    <p
+                        style="
+                            color:#617067;
+                            font-size:13px;
+                            margin-top:5px;
+                        "
+                    >
+                        Your family currently has no safety alerts.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
+
+        <section
+            id="settings"
+            style="
+                margin-bottom:30px;
+            "
+        >
+
+            <h2
+                style="
+                    margin-bottom:18px;
+                "
+            >
+                Quick Actions
+            </h2>
+
+
+            <div
+                style="
+                    display:grid;
+                    grid-template-columns:repeat(3,1fr);
+                    gap:18px;
+                "
+            >
+
+                <a
+                    href="children.html"
+                    class="feature-card"
+                >
+
+                    <div class="feature-icon">
+                        👨‍👩‍👧
+                    </div>
+
+                    <h3>
+                        Manage Children
+                    </h3>
+
+                    <p>
+                        Add, pair and manage your family members.
+                    </p>
+
+                </a>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        Location Sharing
+                    </h3>
+
+                    <p>
+                        View permitted family location information.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Account Settings
+                    </h3>
+
+                    <p>
+                        Manage your account and safety preferences.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer
+            style="
+                padding:25px 0;
+                border-top:1px solid #dce7df;
+                color:#83958a;
+                font-size:13px;
+            "
+        >
+
+            Family Child Safety
+
+            <span style="float:right;">
+                Parent Dashboard
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================
+         DASHBOARD JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /*
+         * Firebase Authentication will be connected
+         * after the Firebase configuration stage.
+         */
+
+
+        /* -----------------------------------------
+           TEMPORARY PARENT INFORMATION
+        ------------------------------------------ */
+
+        const parentName =
+            document.getElementById("parentName");
+
+        const parentEmail =
+            document.getElementById("parentEmail");
+
+        const parentAvatar =
+            document.getElementById("parentAvatar");
+
+
+        /*
+         * Temporary display only.
+         * Real user information will come from
+         * Firebase Authentication.
+         */
+
+        const demoName = "Parent";
+
+        const demoEmail = "Not connected";
+
+
+        parentName.textContent =
+            demoName;
+
+        parentEmail.textContent =
+            demoEmail;
+
+        parentAvatar.textContent =
+            demoName.charAt(0).toUpperCase();
+
+
+        /* -----------------------------------------
+           LAST UPDATE
+        ------------------------------------------ */
+
+        document.getElementById("lastUpdate")
+            .textContent = "—";
+
+
+        /* -----------------------------------------
+           LOGOUT
+        ------------------------------------------ */
+
+        document
+            .getElementById("logoutButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Firebase sign-out will be connected
+                     * in the authentication stage.
+                     */
+
+                    window.location.href =
+                        "login.html";
+
+                }
+            );
+
+    </script>
+
+</body>
+</html>
