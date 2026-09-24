@@ -698,79 +698,247 @@
          DASHBOARD JAVASCRIPT
     ========================================== -->
 
-    <script>
+   <script type="module">
 
-        /*
-         * Firebase Authentication will be connected
-         * after the Firebase configuration stage.
-         */
+    /* =============================================
+       FIREBASE
+    ============================================= */
 
+    import {
+        auth,
+        db
+    } from "../js/firebase-config.js";
 
-        /* -----------------------------------------
-           TEMPORARY PARENT INFORMATION
-        ------------------------------------------ */
+    import {
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-        const parentName =
-            document.getElementById("parentName");
-
-        const parentEmail =
-            document.getElementById("parentEmail");
-
-        const parentAvatar =
-            document.getElementById("parentAvatar");
-
-
-        /*
-         * Temporary display only.
-         * Real user information will come from
-         * Firebase Authentication.
-         */
-
-        const demoName = "Parent";
-
-        const demoEmail = "Not connected";
+    import {
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-        parentName.textContent =
-            demoName;
+    /* =============================================
+       DASHBOARD ELEMENTS
+    ============================================= */
 
-        parentEmail.textContent =
-            demoEmail;
+    const parentName =
+        document.getElementById("parentName");
 
-        parentAvatar.textContent =
-            demoName.charAt(0).toUpperCase();
+    const parentEmail =
+        document.getElementById("parentEmail");
+
+    const parentAvatar =
+        document.getElementById("parentAvatar");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    const lastUpdate =
+        document.getElementById("lastUpdate");
 
 
-        /* -----------------------------------------
-           LAST UPDATE
-        ------------------------------------------ */
+    /* =============================================
+       AUTHENTICATION CHECK
+    ============================================= */
 
-        document.getElementById("lastUpdate")
-            .textContent = "—";
+    onAuthStateChanged(
+        auth,
+        async function (user) {
+
+            /*
+             * No authenticated user
+             */
+
+            if (!user) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
 
 
-        /* -----------------------------------------
-           LOGOUT
-        ------------------------------------------ */
+            /*
+             * Firebase user exists
+             */
 
-        document
-            .getElementById("logoutButton")
-            .addEventListener(
-                "click",
-                function () {
-
-                    /*
-                     * Firebase sign-out will be connected
-                     * in the authentication stage.
-                     */
-
-                    window.location.href =
-                        "login.html";
-
-                }
+            console.log(
+                "Authenticated parent:",
+                user.uid
             );
 
-    </script>
 
-</body>
-</html>
+            /* =============================================
+               INITIAL USER INFORMATION
+            ============================================= */
+
+            const displayName =
+                user.displayName ||
+                "Parent";
+
+            const email =
+                user.email ||
+                "";
+
+
+            parentName.textContent =
+                displayName;
+
+            parentEmail.textContent =
+                email;
+
+            parentAvatar.textContent =
+                displayName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            /* =============================================
+               LOAD FIRESTORE PARENT PROFILE
+            ============================================= */
+
+            try {
+
+                const parentRef =
+                    doc(
+                        db,
+                        "parents",
+                        user.uid
+                    );
+
+
+                const parentSnapshot =
+                    await getDoc(parentRef);
+
+
+                if (parentSnapshot.exists()) {
+
+                    const parentData =
+                        parentSnapshot.data();
+
+
+                    /*
+                     * Full name
+                     */
+
+                    if (
+                        parentData.fullName &&
+                        parentName
+                    ) {
+
+                        parentName.textContent =
+                            parentData.fullName;
+
+                        parentAvatar.textContent =
+                            parentData.fullName
+                                .charAt(0)
+                                .toUpperCase();
+
+                    }
+
+
+                    /*
+                     * Email
+                     */
+
+                    if (
+                        parentData.email &&
+                        parentEmail
+                    ) {
+
+                        parentEmail.textContent =
+                            parentData.email;
+
+                    }
+
+
+                    /*
+                     * Last update
+                     */
+
+                    if (
+                        parentData.updatedAt &&
+                        lastUpdate
+                    ) {
+
+                        const updatedDate =
+                            parentData.updatedAt.toDate();
+
+                        lastUpdate.textContent =
+                            updatedDate.toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "short"
+                                }
+                            );
+
+                    }
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading parent profile:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       LOGOUT
+    ============================================= */
+
+    logoutButton.addEventListener(
+        "click",
+        async function () {
+
+            logoutButton.disabled =
+                true;
+
+            logoutButton.textContent =
+                "Signing Out...";
+
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href =
+                    "login.html";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+
+                logoutButton.disabled =
+                    false;
+
+                logoutButton.textContent =
+                    "Sign Out";
+
+
+                alert(
+                    "Unable to sign out. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+</script>
