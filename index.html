@@ -9,29 +9,1570 @@
     >
 
     <meta
-        http-equiv="refresh"
-        content="0; url=parent-web/index.html"
+        name="description"
+        content="Family Child Safety - A secure family safety platform for connected families."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b6b45"
     >
 
     <title>Family Child Safety</title>
 
-    <script>
-        window.location.replace("parent-web/index.html");
-    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background: #f6faf8;
+            color: #17231e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid #e4ece8;
+        }
+
+        .navbar {
+            min-height: 74px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: linear-gradient(
+                135deg,
+                #087443,
+                #0c9b60
+            );
+
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(8, 116, 67, 0.2);
+        }
+
+        .brand-text {
+            font-size: 19px;
+            font-weight: 800;
+            color: #123c2b;
+        }
+
+        .brand-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            color: #718078;
+            letter-spacing: 0.4px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #506058;
+
+            transition: 0.25s ease;
+        }
+
+        nav a:hover {
+            color: #087443;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 44px;
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid #cddbd4;
+            background: white;
+            color: #146b48;
+        }
+
+        .btn-primary {
+            border: 1px solid #087443;
+            background: #087443;
+            color: white;
+
+            box-shadow:
+                0 8px 18px rgba(8, 116, 67, 0.18);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            padding: 90px 0 80px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(21, 160, 101, 0.14),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f3faf6 100%
+                );
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.05fr)
+                minmax(360px, 0.95fr);
+
+            gap: 70px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            background: #e7f6ee;
+            color: #087443;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #0b9a5e;
+        }
+
+        .hero h1 {
+            max-width: 720px;
+
+            font-size: clamp(40px, 5vw, 66px);
+            line-height: 1.06;
+
+            letter-spacing: -2px;
+
+            color: #123c2b;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #087443;
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            color: #617069;
+
+            font-size: 17px;
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-note {
+            margin-top: 20px;
+
+            font-size: 12px;
+            color: #7a8781;
+        }
+
+        /* =========================
+           SAFETY CARD
+        ========================== */
+
+        .safety-card {
+            position: relative;
+
+            padding: 28px;
+
+            border-radius: 28px;
+
+            background: white;
+
+            border: 1px solid #e1ebe6;
+
+            box-shadow:
+                0 25px 70px rgba(23, 73, 53, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-weight: 800;
+            color: #173d2d;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #e9f8f0;
+            color: #168152;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #1da66a;
+        }
+
+        .map-preview {
+            height: 230px;
+
+            border-radius: 20px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dff2e8,
+                    #f5f7ee
+                );
+        }
+
+        .map-line {
+            position: absolute;
+
+            width: 150%;
+            height: 4px;
+
+            background: rgba(8, 116, 67, 0.14);
+
+            transform: rotate(-22deg);
+        }
+
+        .map-line.one {
+            top: 35%;
+            left: -20%;
+        }
+
+        .map-line.two {
+            top: 62%;
+            left: -10%;
+            transform: rotate(20deg);
+        }
+
+        .map-road {
+            position: absolute;
+
+            width: 120%;
+            height: 28px;
+
+            background: rgba(255, 255, 255, 0.75);
+
+            transform: rotate(-12deg);
+
+            top: 48%;
+            left: -10%;
+        }
+
+        .location-pin {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50% 50% 50% 0;
+
+            background: #087443;
+            color: white;
+
+            font-size: 20px;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(-45deg);
+
+            box-shadow:
+                0 10px 25px rgba(8, 116, 67, 0.3);
+        }
+
+        .location-pin span {
+            transform: rotate(45deg);
+        }
+
+        .child-status {
+            margin-top: 18px;
+
+            padding: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-radius: 16px;
+
+            background: #f5faf7;
+        }
+
+        .child-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dcefe5;
+            color: #087443;
+
+            font-weight: 800;
+        }
+
+        .child-name {
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .child-location {
+            font-size: 11px;
+            color: #7b8781;
+        }
+
+        .safe-text {
+            color: #168152;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .section-label {
+            color: #087443;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.15;
+
+            color: #163d2d;
+
+            margin-bottom: 14px;
+        }
+
+        .section-heading p {
+            color: #6b7871;
+            font-size: 15px;
+        }
+
+        /* =========================
+           FEATURES
+        ========================== */
+
+        .features {
+            background: white;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 28px;
+
+            border: 1px solid #e3ece7;
+
+            border-radius: 20px;
+
+            background: white;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 20px 45px rgba(28, 75, 56, 0.09);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #e7f6ee;
+
+            color: #087443;
+
+            font-size: 21px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #173d2d;
+
+            font-size: 17px;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #728078;
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================== */
+
+        .steps {
+            background: #f4faf7;
+        }
+
+        .step-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .step {
+            position: relative;
+
+            padding: 28px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            border: 1px solid #e2ece7;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #087443;
+            color: white;
+
+            font-weight: 900;
+
+            margin-bottom: 18px;
+        }
+
+        .step h3 {
+            color: #173d2d;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #728078;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PRIVACY
+        ========================== */
+
+        .privacy-box {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 50px;
+
+            align-items: center;
+
+            padding: 45px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b6541,
+                    #087443
+                );
+
+            color: white;
+
+            box-shadow:
+                0 25px 55px rgba(8, 116, 67, 0.2);
+        }
+
+        .privacy-box h2 {
+            font-size: 36px;
+            line-height: 1.15;
+
+            margin-bottom: 15px;
+        }
+
+        .privacy-box p {
+            color: rgba(255,255,255,0.82);
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .privacy-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .privacy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            background: rgba(255,255,255,0.08);
+        }
+
+        .privacy-check {
+            width: 25px;
+            height: 25px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.15);
+
+            font-size: 12px;
+        }
+
+        .privacy-item strong {
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 2px;
+        }
+
+        .privacy-item span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            text-align: center;
+            background: white;
+        }
+
+        .cta h2 {
+            color: #163d2d;
+
+            font-size: clamp(30px, 4vw, 44px);
+
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            max-width: 600px;
+
+            margin: 0 auto 25px;
+
+            color: #718078;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #102d22;
+            color: white;
+
+            padding: 45px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 35px;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        .footer-description {
+            max-width: 420px;
+
+            color: rgba(255,255,255,0.62);
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: rgba(255,255,255,0.62);
+
+            font-size: 12px;
+
+            margin-bottom: 9px;
+
+            transition: 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,0.1);
+
+            color: rgba(255,255,255,0.45);
+
+            font-size: 11px;
+
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+
+                gap: 45px;
+            }
+
+            .feature-grid,
+            .step-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .privacy-box {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                min-height: 66px;
+            }
+
+            .brand-text {
+                font-size: 16px;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-buttons .btn-outline {
+                display: none;
+            }
+
+            .nav-buttons .btn-primary {
+                min-height: 40px;
+                padding: 0 13px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .feature-grid,
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-box {
+                padding: 28px;
+            }
+
+            .privacy-box h2 {
+                font-size: 30px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .safety-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <p>
-        Redirecting to Family Child Safety...
-    </p>
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-    <p>
-        If you are not redirected automatically,
-        <a href="parent-web/index.html">
-            click here
-        </a>.
-    </p>
+    <header>
+
+        <div class="container navbar">
+
+            <a href="index.html" class="brand">
+
+                <div class="brand-icon">
+                    F
+                </div>
+
+                <div class="brand-text">
+                    Family Child Safety
+                    <span>
+                        Connected. Protected. Together.
+                    </span>
+                </div>
+
+            </a>
+
+            <nav>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="#privacy">
+                    Privacy
+                </a>
+
+            </nav>
+
+            <div class="nav-buttons">
+
+                <a
+                    href="parent/login.html"
+                    class="btn btn-outline"
+                >
+                    Parent Login
+                </a>
+
+                <a
+                    href="parent/register.html"
+                    class="btn btn-primary"
+                >
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="container hero-grid">
+
+                <div>
+
+                    <div class="badge">
+                        <span class="badge-dot"></span>
+                        Family Safety Platform
+                    </div>
+
+                    <h1>
+                        Keep your family
+                        <span>connected and safe.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Family Child Safety is a secure platform
+                        designed to help parents stay connected with
+                        their children through consent-based safety
+                        features, location sharing, emergency alerts,
+                        and family management tools.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="parent/register.html"
+                            class="btn btn-primary"
+                        >
+                            Create Parent Account
+                        </a>
+
+                        <a
+                            href="#how-it-works"
+                            class="btn btn-outline"
+                        >
+                            Learn How It Works
+                        </a>
+
+                    </div>
+
+                    <p class="hero-note">
+                        Privacy-first design • Permission-based features
+                        • Family-controlled access
+                    </p>
+
+                </div>
+
+
+                <!-- Safety Preview -->
+
+                <div class="safety-card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Family Safety
+                        </div>
+
+                        <div class="status">
+                            <span class="status-dot"></span>
+                            Protected
+                        </div>
+
+                    </div>
+
+
+                    <div class="map-preview">
+
+                        <div class="map-line one"></div>
+                        <div class="map-line two"></div>
+                        <div class="map-road"></div>
+
+                        <div class="location-pin">
+                            <span>●</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="child-status">
+
+                        <div class="child-info">
+
+                            <div class="avatar">
+                                C
+                            </div>
+
+                            <div>
+
+                                <div class="child-name">
+                                    Family Member
+                                </div>
+
+                                <div class="child-location">
+                                    Location sharing enabled
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="safe-text">
+                            Safe
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FEATURES
+        ========================== -->
+
+        <section
+            id="features"
+            class="features"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Safety Features
+                    </div>
+
+                    <h2>
+                        Tools designed around family safety
+                    </h2>
+
+                    <p>
+                        The platform will provide practical safety
+                        features while keeping permissions,
+                        privacy, and family control at the center.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            📍
+                        </div>
+
+                        <h3>
+                            Location Sharing
+                        </h3>
+
+                        <p>
+                            Family members can share their location
+                            after granting the required device
+                            permissions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🚨
+                        </div>
+
+                        <h3>
+                            Emergency SOS
+                        </h3>
+
+                        <p>
+                            Provide a quick emergency mechanism for
+                            sending an alert to trusted family members.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            👨‍👩‍👧
+                        </div>
+
+                        <h3>
+                            Family Management
+                        </h3>
+
+                        <p>
+                            Parents can manage connected family
+                            members and their safety settings.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🔔
+                        </div>
+
+                        <h3>
+                            Safety Alerts
+                        </h3>
+
+                        <p>
+                            Receive important notifications about
+                            emergency events and configured safety
+                            conditions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🔐
+                        </div>
+
+                        <h3>
+                            Secure Access
+                        </h3>
+
+                        <p>
+                            Authentication and Firebase security rules
+                            will control access to family data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🛡️
+                        </div>
+
+                        <h3>
+                            Privacy First
+                        </h3>
+
+                        <p>
+                            Camera, microphone, location, and other
+                            sensitive capabilities require appropriate
+                            user permissions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HOW IT WORKS
+        ========================== -->
+
+        <section
+            id="how-it-works"
+            class="steps"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Simple Process
+                    </div>
+
+                    <h2>
+                        How Family Child Safety works
+                    </h2>
+
+                    <p>
+                        A simple family connection flow designed for
+                        responsible and transparent safety management.
+                    </p>
+
+                </div>
+
+
+                <div class="step-grid">
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <h3>
+                            Create a Parent Account
+                        </h3>
+
+                        <p>
+                            Register securely and create your family
+                            safety profile.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <h3>
+                            Connect Family Members
+                        </h3>
+
+                        <p>
+                            Connect approved family devices using a
+                            secure pairing process.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <h3>
+                            Manage Safety
+                        </h3>
+
+                        <p>
+                            Use permitted safety features such as
+                            location sharing and emergency alerts.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRIVACY
+        ========================== -->
+
+        <section id="privacy">
+
+            <div class="container">
+
+                <div class="privacy-box">
+
+                    <div>
+
+                        <h2>
+                            Safety should never mean
+                            giving up privacy.
+                        </h2>
+
+                        <p>
+                            Family Child Safety is being designed
+                            around transparency and user consent.
+                            Sensitive device capabilities should only
+                            operate after the required permissions are
+                            granted and according to the platform's
+                            privacy rules.
+                        </p>
+
+                    </div>
+
+
+                    <div class="privacy-list">
+
+                        <div class="privacy-item">
+
+                            <div class="privacy-check">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Permission-based access
+                                </strong>
+
+                                <span>
+                                    Sensitive device features require
+                                    appropriate permissions.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="privacy-item">
+
+                            <div class="privacy-check">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Family-controlled connections
+                                </strong>
+
+                                <span>
+                                    Connected family relationships are
+                                    managed through the platform.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="privacy-item">
+
+                            <div class="privacy-check">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Secure data access
+                                </strong>
+
+                                <span>
+                                    Firebase authentication and
+                                    security rules protect family data.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CTA
+        ========================== -->
+
+        <section class="cta">
+
+            <div class="container">
+
+                <h2>
+                    Build a safer connected family
+                </h2>
+
+                <p>
+                    Start by creating a parent account. We will build
+                    the complete platform step by step.
+                </p>
+
+                <a
+                    href="parent/register.html"
+                    class="btn btn-primary"
+                >
+                    Get Started
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <div class="footer-brand">
+                        Family Child Safety
+                    </div>
+
+                    <p class="footer-description">
+                        A privacy-conscious family safety platform
+                        designed to help families stay connected,
+                        informed, and prepared.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Platform
+                    </h4>
+
+                    <a href="#features">
+                        Features
+                    </a>
+
+                    <a href="#how-it-works">
+                        How It Works
+                    </a>
+
+                    <a href="#privacy">
+                        Privacy
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Account
+                    </h4>
+
+                    <a href="parent/login.html">
+                        Parent Login
+                    </a>
+
+                    <a href="parent/register.html">
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="copyright">
+
+                © 2026 Family Child Safety.
+                All rights reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
 
 </body>
 </html>
