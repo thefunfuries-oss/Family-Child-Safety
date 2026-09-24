@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create a secure parent account for Family Child Safety."
+    >
+
+    <title>Create Account | Family Child Safety</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-container">
+
+        <section class="auth-card">
+
+            <!-- Header -->
+            <div class="auth-header">
+
+                <a
+                    href="../index.html"
+                    class="auth-logo"
+                    aria-label="Family Child Safety Home"
+                >
+                    F
+                </a>
+
+                <h1>Create Account</h1>
+
+                <p>
+                    Create your secure Family Child Safety parent account.
+                </p>
+
+            </div>
+
+
+            <!-- Registration Form -->
+            <form
+                id="registerForm"
+                novalidate
+            >
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label
+                        for="fullName"
+                        class="form-label"
+                    >
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        class="form-input"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label
+                        for="email"
+                        class="form-label"
+                    >
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Mobile -->
+                <div class="form-group">
+
+                    <label
+                        for="phone"
+                        class="form-label"
+                    >
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        class="form-input"
+                        placeholder="Enter your mobile number"
+                        autocomplete="tel"
+                        inputmode="tel"
+                    >
+
+                    <div class="form-help">
+                        Mobile number can be used for account recovery and
+                        future safety notifications.
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label
+                        for="password"
+                        class="form-label"
+                    >
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+
+                    <label
+                        for="confirmPassword"
+                        class="form-label"
+                    >
+                        Confirm Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            class="form-input"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggleConfirmPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Terms -->
+                <div
+                    style="
+                        display:flex;
+                        align-items:flex-start;
+                        gap:9px;
+                        margin-bottom:20px;
+                        color:#617067;
+                        font-size:13px;
+                    "
+                >
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                        style="margin-top:4px;"
+                    >
+
+                    <label for="terms">
+
+                        I agree to use Family Child Safety responsibly
+                        and understand that safety features require
+                        appropriate device permissions and consent.
+
+                    </label>
+
+                </div>
+
+
+                <!-- Message -->
+                <div
+                    id="registerMessage"
+                    class="alert"
+                    style="display:none;"
+                    role="alert"
+                ></div>
+
+
+                <!-- Create Account -->
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-block"
+                    id="registerButton"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Existing Account -->
+            <div
+                style="
+                    text-align:center;
+                    margin-top:25px;
+                    padding-top:22px;
+                    border-top:1px solid #dce7df;
+                    color:#617067;
+                    font-size:14px;
+                "
+            >
+
+                Already have an account?
+
+                <a
+                    href="login.html"
+                    style="
+                        color:#16803c;
+                        font-weight:700;
+                    "
+                >
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <!-- Home -->
+            <div
+                style="
+                    text-align:center;
+                    margin-top:18px;
+                "
+            >
+
+                <a
+                    href="../index.html"
+                    style="
+                        color:#617067;
+                        font-size:13px;
+                    "
+                >
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =============================================
+           PASSWORD SHOW / HIDE
+        ============================================= */
+
+        const password =
+            document.getElementById("password");
+
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const toggleConfirmPassword =
+            document.getElementById("toggleConfirmPassword");
+
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                const hidden =
+                    password.type === "password";
+
+                password.type =
+                    hidden ? "text" : "password";
+
+                togglePassword.textContent =
+                    hidden ? "Hide" : "Show";
+
+            }
+        );
+
+
+        toggleConfirmPassword.addEventListener(
+            "click",
+            function () {
+
+                const hidden =
+                    confirmPassword.type === "password";
+
+                confirmPassword.type =
+                    hidden ? "text" : "password";
+
+                toggleConfirmPassword.textContent =
+                    hidden ? "Hide" : "Show";
+
+            }
+        );
+
+
+        /* =============================================
+           FORM
+        ============================================= */
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const registerButton =
+            document.getElementById("registerButton");
+
+        const registerMessage =
+            document.getElementById("registerMessage");
+
+
+        registerForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const fullName =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+                const passwordValue =
+                    password.value;
+
+                const confirmPasswordValue =
+                    confirmPassword.value;
+
+                const terms =
+                    document.getElementById("terms").checked;
+
+
+                hideMessage();
+
+
+                /* Full name */
+
+                if (fullName.length < 2) {
+
+                    showMessage(
+                        "Please enter your full name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Email */
+
+                if (!isValidEmail(email)) {
+
+                    showMessage(
+                        "Please enter a valid email address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Password */
+
+                if (passwordValue.length < 8) {
+
+                    showMessage(
+                        "Password must contain at least 8 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Confirm password */
+
+                if (
+                    passwordValue !==
+                    confirmPasswordValue
+                ) {
+
+                    showMessage(
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Terms */
+
+                if (!terms) {
+
+                    showMessage(
+                        "Please accept the responsible-use agreement.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Temporary state */
+
+                registerButton.disabled = true;
+
+                registerButton.textContent =
+                    "Creating Account...";
+
+
+                /*
+                    Firebase Authentication will be
+                    connected in the next stage.
+                */
+
+                setTimeout(function () {
+
+                    registerButton.disabled = false;
+
+                    registerButton.textContent =
+                        "Create Account";
+
+                    showMessage(
+                        "Registration form is ready. Firebase Authentication will be connected next.",
+                        "success"
+                    );
+
+                }, 700);
+
+            }
+        );
+
+
+        /* =============================================
+           EMAIL VALIDATION
+        ============================================= */
+
+        function isValidEmail(email) {
+
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(email);
+
+        }
+
+
+        /* =============================================
+           MESSAGE FUNCTIONS
+        ============================================= */
+
+        function showMessage(message, type) {
+
+            registerMessage.textContent =
+                message;
+
+            registerMessage.style.display =
+                "block";
+
+            registerMessage.className =
+                "alert " +
+                (
+                    type === "success"
+                        ? "alert-success"
+                        : "alert-error"
+                );
+
+        }
+
+
+        function hideMessage() {
+
+            registerMessage.style.display =
+                "none";
+
+            registerMessage.textContent = "";
+
+        }
+
+    </script>
+
+</body>
+</html>
