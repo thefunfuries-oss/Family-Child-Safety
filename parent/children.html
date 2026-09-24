@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Children | Family Child Safety</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* =========================================
+           CHILDREN PAGE
+        ========================================= */
+
+        .children-page {
+            padding-bottom: 40px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .page-heading h1 {
+            margin: 0 0 6px;
+            font-size: 30px;
+        }
+
+        .page-heading p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .children-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .child-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .child-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+        }
+
+        .child-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .child-avatar {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e8f5ee;
+            color: #046a38;
+            font-size: 21px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .child-name {
+            margin: 0 0 4px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .child-age {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .child-info {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            color: #64748b;
+        }
+
+        .info-value {
+            color: #0f172a;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-badge.connected {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-badge.offline {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .child-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .child-actions .btn {
+            flex: 1;
+        }
+
+        .empty-state {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 55px 25px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #e8f5ee;
+            color: #046a38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .empty-state h2 {
+            margin: 0 0 8px;
+            font-size: 22px;
+        }
+
+        .empty-state p {
+            max-width: 520px;
+            margin: 0 auto 22px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Add Child Modal */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .modal-header h2 {
+            margin: 0 0 5px;
+        }
+
+        .modal-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .close-modal {
+            border: none;
+            background: #f1f5f9;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #475569;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #046a38;
+            box-shadow: 0 0 0 3px rgba(4, 106, 56, 0.10);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        .form-message {
+            display: none;
+            padding: 11px 13px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .form-message.show {
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .form-message.success {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 45px 20px;
+            color: #64748b;
+        }
+
+        @media (max-width: 700px) {
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .page-heading .btn {
+                width: 100%;
+            }
+
+            .children-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-layout">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-mark">F</span>
+                <span>Family Safety</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="sidebar-link">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="children.html" class="sidebar-link active">
+                <span>👨‍👩‍👧</span>
+                <span>Children</span>
+            </a>
+
+            <a href="dashboard.html#location" class="sidebar-link">
+                <span>📍</span>
+                <span>Location</span>
+            </a>
+
+            <a href="dashboard.html#alerts" class="sidebar-link">
+                <span>🚨</span>
+                <span>Alerts</span>
+            </a>
+
+            <a href="dashboard.html#settings" class="sidebar-link">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutButton" class="btn btn-outline btn-block">
+                Sign Out
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>My Children</h1>
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar" id="parentAvatar">
+                    P
+                </div>
+
+                <div>
+                    <div id="parentName">Parent</div>
+                    <small id="parentEmail">Account</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="children-page">
+
+            <!-- Page Heading -->
+
+            <div class="page-heading">
+
+                <div>
+                    <h1>Children</h1>
+                    <p>
+                        Manage your children's profiles and family safety connections.
+                    </p>
+                </div>
+
+                <button id="addChildButton" class="btn btn-primary">
+                    + Add Child
+                </button>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <div id="loadingState" class="loading-state">
+                Loading children...
+            </div>
+
+
+            <!-- Children Grid -->
+
+            <div id="childrenGrid" class="children-grid"></div>
+
+
+            <!-- Empty State -->
+
+            <div id="emptyState" class="empty-state" style="display:none;">
+
+                <div class="empty-icon">
+                    👨‍👩‍👧
+                </div>
+
+                <h2>No children added yet</h2>
+
+                <p>
+                    Add your first child profile to begin setting up your
+                    family safety system.
+                </p>
+
+                <button id="emptyAddButton" class="btn btn-primary">
+                    Add Your First Child
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         ADD CHILD MODAL
+    ========================== -->
+
+    <div id="childModal" class="modal-overlay">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>Add Child</h2>
+                    <p>Create a profile for your child.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="closeModalButton"
+                    class="close-modal"
+                    aria-label="Close">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div id="formMessage" class="form-message"></div>
+
+
+            <form id="childForm">
+
+                <div class="form-group">
+
+                    <label for="childName">
+                        Child's Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="childName"
+                        placeholder="Enter child's name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="childAge">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="childAge"
+                        min="1"
+                        max="25"
+                        placeholder="Enter age"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="childGender">
+                        Gender
+                    </label>
+
+                    <select id="childGender" required>
+
+                        <option value="">
+                            Select gender
+                        </option>
+
+                        <option value="male">
+                            Male
+                        </option>
+
+                        <option value="female">
+                            Female
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                        <option value="prefer_not_to_say">
+                            Prefer not to say
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="childNote">
+                        Note <span style="font-weight:400;color:#94a3b8;">(optional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="childNote"
+                        placeholder="e.g. School-going child">
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        id="cancelButton"
+                        class="btn btn-outline">
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="saveChildButton"
+                        class="btn btn-primary">
+                        Save Child
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FIREBASE
+    ========================== -->
+
+    <script type="module">
+
+        import { auth, db } from "../js/firebase-config.js";
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+        import {
+            collection,
+            addDoc,
+            getDocs,
+            query,
+            orderBy,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const parentName =
+            document.getElementById("parentName");
+
+        const parentEmail =
+            document.getElementById("parentEmail");
+
+        const parentAvatar =
+            document.getElementById("parentAvatar");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const addChildButton =
+            document.getElementById("addChildButton");
+
+        const emptyAddButton =
+            document.getElementById("emptyAddButton");
+
+        const childModal =
+            document.getElementById("childModal");
+
+        const closeModalButton =
+            document.getElementById("closeModalButton");
+
+        const cancelButton =
+            document.getElementById("cancelButton");
+
+        const childForm =
+            document.getElementById("childForm");
+
+        const childName =
+            document.getElementById("childName");
+
+        const childAge =
+            document.getElementById("childAge");
+
+        const childGender =
+            document.getElementById("childGender");
+
+        const childNote =
+            document.getElementById("childNote");
+
+        const saveChildButton =
+            document.getElementById("saveChildButton");
+
+        const childrenGrid =
+            document.getElementById("childrenGrid");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+        const loadingState =
+            document.getElementById("loadingState");
+
+        const formMessage =
+            document.getElementById("formMessage");
+
+
+        let currentUser = null;
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        function openModal() {
+
+            childModal.classList.add("active");
+
+            childName.focus();
+
+        }
+
+
+        function closeModal() {
+
+            childModal.classList.remove("active");
+
+            childForm.reset();
+
+            hideMessage();
+
+        }
+
+
+        addChildButton.addEventListener(
+            "click",
+            openModal
+        );
+
+
+        emptyAddButton.addEventListener(
+            "click",
+            openModal
+        );
+
+
+        closeModalButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        cancelButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        childModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === childModal) {
+                    closeModal();
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        function showMessage(message, type) {
+
+            formMessage.textContent = message;
+
+            formMessage.className =
+                "form-message show " + type;
+
+        }
+
+
+        function hideMessage() {
+
+            formMessage.textContent = "";
+
+            formMessage.className =
+                "form-message";
+
+        }
+
+
+        /* =========================================
+           LOAD PARENT PROFILE
+        ========================================= */
+
+        async function loadParentProfile(user) {
+
+            parentName.textContent =
+                user.displayName || "Parent";
+
+            parentEmail.textContent =
+                user.email || "";
+
+            parentAvatar.textContent =
+                (user.displayName || "P")
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+        /* =========================================
+           LOAD CHILDREN
+        ========================================= */
+
+        async function loadChildren() {
+
+            loadingState.style.display = "block";
+
+            childrenGrid.innerHTML = "";
+
+            emptyState.style.display = "none";
+
+
+            try {
+
+                const childrenRef =
+                    collection(
+                        db,
+                        "parents",
+                        currentUser.uid,
+                        "children"
+                    );
+
+
+                const childrenQuery =
+                    query(
+                        childrenRef,
+                        orderBy("createdAt", "desc")
+                    );
+
+
+                const snapshot =
+                    await getDocs(childrenQuery);
+
+
+                loadingState.style.display = "none";
+
+
+                if (snapshot.empty) {
+
+                    emptyState.style.display = "block";
+
+                    return;
+
+                }
+
+
+                snapshot.forEach(function(docSnapshot) {
+
+                    const child =
+                        docSnapshot.data();
+
+                    renderChild(
+                        docSnapshot.id,
+                        child
+                    );
+
+                });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading children:",
+                    error
+                );
+
+                loadingState.style.display = "none";
+
+                childrenGrid.innerHTML = `
+                    <div class="empty-state" style="display:block;">
+                        <div class="empty-icon">⚠️</div>
+                        <h2>Unable to load children</h2>
+                        <p>
+                            Please check your connection and Firestore
+                            permissions, then try again.
+                        </p>
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =========================================
+           RENDER CHILD
+        ========================================= */
+
+        function renderChild(childId, child) {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "child-card";
+
+
+            const name =
+                child.name || "Child";
+
+
+            const initial =
+                name
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const age =
+                child.age
+                    ? `${child.age} years old`
+                    : "Age not specified";
+
+
+            const gender =
+                child.gender
+                    ? formatGender(child.gender)
+                    : "Not specified";
+
+
+            const status =
+                child.connectionStatus || "pending";
+
+
+            const statusText =
+                formatStatus(status);
+
+
+            card.innerHTML = `
+
+                <div class="child-top">
+
+                    <div class="child-avatar">
+                        ${escapeHtml(initial)}
+                    </div>
+
+                    <div>
+
+                        <h3 class="child-name">
+                            ${escapeHtml(name)}
+                        </h3>
+
+                        <p class="child-age">
+                            ${escapeHtml(age)}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="child-info">
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Gender
+                        </span>
+
+                        <span class="info-value">
+                            ${escapeHtml(gender)}
+                        </span>
+                    </div>
+
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            Connection
+                        </span>
+
+                        <span class="info-value">
+
+                            <span class="status-badge ${status}">
+                                ● ${escapeHtml(statusText)}
+                            </span>
+
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="child-actions">
+
+                    <button
+                        class="btn btn-outline"
+                        type="button"
+                        disabled>
+                        View Profile
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        type="button"
+                        disabled>
+                        Pair Device
+                    </button>
+
+                </div>
+
+            `;
+
+
+            childrenGrid.appendChild(card);
+
+        }
+
+
+        /* =========================================
+           ADD CHILD
+        ========================================= */
+
+        childForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (!currentUser) {
+
+                    showMessage(
+                        "Please sign in again.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const name =
+                    childName.value.trim();
+
+                const age =
+                    Number(childAge.value);
+
+                const gender =
+                    childGender.value;
+
+                const note =
+                    childNote.value.trim();
+
+
+                if (!name) {
+
+                    showMessage(
+                        "Please enter the child's name.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!age || age < 1 || age > 25) {
+
+                    showMessage(
+                        "Please enter a valid age.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!gender) {
+
+                    showMessage(
+                        "Please select the child's gender.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                saveChildButton.disabled = true;
+
+                saveChildButton.textContent =
+                    "Saving...";
+
+
+                try {
+
+                    const childrenRef =
+                        collection(
+                            db,
+                            "parents",
+                            currentUser.uid,
+                            "children"
+                        );
+
+
+                    await addDoc(
+                        childrenRef,
+                        {
+                            name: name,
+                            age: age,
+                            gender: gender,
+                            note: note,
+
+                            connectionStatus:
+                                "pending",
+
+                            locationSharing:
+                                false,
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            updatedAt:
+                                serverTimestamp()
+                        }
+                    );
+
+
+                    showMessage(
+                        "Child profile added successfully.",
+                        "success"
+                    );
+
+
+                    await loadChildren();
+
+
+                    setTimeout(
+                        closeModal,
+                        700
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Error adding child:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Unable to save the child profile. Please try again.",
+                        "error"
+                    );
+
+                } finally {
+
+                    saveChildButton.disabled = false;
+
+                    saveChildButton.textContent =
+                        "Save Child";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        logoutButton.addEventListener(
+            "click",
+            async function() {
+
+                logoutButton.disabled = true;
+
+                logoutButton.textContent =
+                    "Signing Out...";
+
+
+                try {
+
+                    await signOut(auth);
+
+                    window.location.href =
+                        "login.html";
+
+                } catch (error) {
+
+                    console.error(
+                        "Logout error:",
+                        error
+                    );
+
+                    logoutButton.disabled = false;
+
+                    logoutButton.textContent =
+                        "Sign Out";
+
+                    alert(
+                        "Unable to sign out. Please try again."
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           AUTH STATE
+        ========================================= */
+
+        onAuthStateChanged(
+            auth,
+            async function(user) {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                currentUser = user;
+
+
+                await loadParentProfile(user);
+
+                await loadChildren();
+
+            }
+        );
+
+
+        /* =========================================
+           HELPERS
+        ========================================= */
+
+        function formatGender(gender) {
+
+            const values = {
+
+                male: "Male",
+
+                female: "Female",
+
+                other: "Other",
+
+                prefer_not_to_say:
+                    "Prefer not to say"
+
+            };
+
+            return values[gender] || gender;
+
+        }
+
+
+        function formatStatus(status) {
+
+            const values = {
+
+                connected: "Connected",
+
+                pending: "Not paired",
+
+                offline: "Offline"
+
+            };
+
+            return values[status] || "Not paired";
+
+        }
+
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+    </script>
+
+</body>
+</html>
