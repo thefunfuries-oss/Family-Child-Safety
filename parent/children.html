@@ -1344,13 +1344,18 @@
 
                 <div class="child-actions">
 
-                    <button
+                    <a
                         class="btn btn-outline"
-                        type="button"
-                        disabled
-                    >
+                        href="child-profile.html?id=${encodeURIComponent(child.id)}"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        text-decoration:none;
+                    "
+                >
                         View Profile
-                    </button>
+                    </a>
 
                     <button
                         class="btn btn-primary"
