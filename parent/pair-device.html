@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Securely pair a child's device with parental consent."
+    >
+
+    <title>Pair Device | Family Child Safety</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        .pair-page {
+            max-width: 850px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .pair-card {
+            padding: 32px;
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            background: var(--white);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pair-header {
+            text-align: center;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pair-icon {
+            width: 76px;
+            height: 76px;
+
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 22px;
+
+            color: var(--primary-dark);
+            background: var(--primary-light);
+
+            font-size: 30px;
+        }
+
+        .pair-header h2 {
+            margin-bottom: 8px;
+            font-size: 26px;
+        }
+
+        .pair-header p {
+            max-width: 600px;
+            margin: auto;
+
+            color: var(--text-light);
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .child-summary {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 18px;
+
+            margin: 25px 0;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: #f8fbf9;
+        }
+
+        .child-summary-avatar {
+            width: 55px;
+            height: 55px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 15px;
+
+            color: var(--primary-dark);
+            background: var(--primary-light);
+
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .child-summary h3 {
+            margin-bottom: 3px;
+            font-size: 17px;
+        }
+
+        .child-summary p {
+            color: var(--text-light);
+            font-size: 12px;
+        }
+
+        .instructions {
+            display: grid;
+            gap: 14px;
+
+            margin: 25px 0;
+        }
+
+        .instruction {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+        }
+
+        .instruction-number {
+            width: 30px;
+            height: 30px;
+
+            flex: 0 0 30px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            color: white;
+            background: var(--primary);
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .instruction strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .instruction span {
+            color: var(--text-light);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .code-section {
+            display: none;
+
+            margin-top: 28px;
+
+            padding: 28px;
+
+            text-align: center;
+
+            border: 1px solid #cfe5d5;
+            border-radius: 18px;
+
+            background: #f5fbf7;
+        }
+
+        .code-section.active {
+            display: block;
+        }
+
+        .code-label {
+            margin-bottom: 10px;
+
+            color: var(--text-light);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pair-code {
+            margin: 5px 0 12px;
+
+            color: var(--primary-dark);
+
+            font-size: 38px;
+            font-weight: 900;
+
+            letter-spacing: 8px;
+        }
+
+        .expires {
+            color: #8a5a00;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .security-note {
+            margin-top: 25px;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            color: #536158;
+            background: #f1f4f2;
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .message {
+            display: none;
+
+            padding: 13px 15px;
+
+            margin-top: 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            color: #9f202b;
+            background: #fff0f1;
+            border: 1px solid #f4c7cb;
+        }
+
+        .message.success {
+            color: #14652e;
+            background: #e9f8ed;
+            border: 1px solid #c9ead2;
+        }
+
+        .action-area {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+
+            .pair-card {
+                padding: 22px;
+            }
+
+            .pair-code {
+                font-size: 30px;
+                letter-spacing: 5px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body class="dashboard-layout">
+
+
+    <aside class="dashboard-sidebar">
+
+        <div
+            class="logo"
+            style="color:white; margin-bottom:35px;"
+        >
+
+            <div class="logo-icon">
+                F
+            </div>
+
+            <span>
+                Family Child Safety
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <ul
+                style="
+                    list-style:none;
+                    display:grid;
+                    gap:8px;
+                "
+            >
+
+                <li>
+                    <a
+                        href="dashboard.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="children.html"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            background:rgba(255,255,255,0.10);
+                            color:white;
+                            font-weight:700;
+                        "
+                    >
+                        My Children
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="dashboard.html#location"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Location
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="dashboard.html#alerts"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Safety Alerts
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="dashboard.html#settings"
+                        style="
+                            display:block;
+                            padding:13px 15px;
+                            border-radius:10px;
+                            color:#b9c9bf;
+                        "
+                    >
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div
+            style="
+                position:absolute;
+                bottom:25px;
+                left:18px;
+                right:18px;
+            "
+        >
+
+            <button
+                id="logoutButton"
+                class="btn btn-outline btn-block"
+                style="
+                    color:white;
+                    border-color:rgba(255,255,255,0.20);
+                    background:transparent;
+                "
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-topbar">
+
+            <div class="dashboard-title">
+
+                <h1>
+                    Pair Child Device
+                </h1>
+
+                <p>
+                    Create a secure pairing request for your child's device.
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    gap:12px;
+                "
+            >
+
+                <div
+                    class="avatar"
+                    id="parentAvatar"
+                >
+                    P
+                </div>
+
+                <div>
+
+                    <div
+                        id="parentName"
+                        style="font-weight:700;"
+                    >
+                        Parent
+                    </div>
+
+                    <div
+                        id="parentEmail"
+                        style="
+                            color:#617067;
+                            font-size:12px;
+                        "
+                    >
+                        Account
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="pair-page">
+
+            <a
+                href="children.html"
+                class="back-link"
+            >
+                ← Back to My Children
+            </a>
+
+
+            <div class="pair-card">
+
+
+                <div class="pair-header">
+
+                    <div class="pair-icon">
+                        🔗
+                    </div>
+
+                    <h2>
+                        Secure Device Pairing
+                    </h2>
+
+                    <p>
+                        Generate a temporary pairing code that can be
+                        entered on the child's device. Pairing does not
+                        automatically enable location, camera, microphone,
+                        or other device permissions.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="childSummary"
+                    class="child-summary"
+                    style="display:none;"
+                >
+
+                    <div
+                        id="childAvatar"
+                        class="child-summary-avatar"
+                    >
+                        C
+                    </div>
+
+                    <div>
+
+                        <h3 id="childName">
+                            Child
+                        </h3>
+
+                        <p id="childAge">
+                            Age not specified
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="instructions">
+
+
+                    <div class="instruction">
+
+                        <div class="instruction-number">
+                            1
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Generate a pairing code
+                            </strong>
+
+                            <span>
+                                A temporary code will be created for
+                                this specific child profile.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="instruction">
+
+                        <div class="instruction-number">
+                            2
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Enter the code on the child's device
+                            </strong>
+
+                            <span>
+                                The child uses the code on the Family
+                                Child Safety device setup screen.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="instruction">
+
+                        <div class="instruction-number">
+                            3
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Child confirms the connection
+                            </strong>
+
+                            <span>
+                                The connection becomes active only after
+                                the required consent and device
+                                permissions are completed.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="codeSection"
+                    class="code-section"
+                >
+
+                    <div class="code-label">
+                        YOUR TEMPORARY PAIRING CODE
+                    </div>
+
+                    <div
+                        id="pairCode"
+                        class="pair-code"
+                    >
+                        ------
+                    </div>
+
+                    <div
+                        id="expiresText"
+                        class="expires"
+                    >
+                        Expires soon
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="message"
+                    class="message"
+                ></div>
+
+
+                <div class="security-note">
+
+                    <strong>
+                        Privacy & Safety
+                    </strong>
+
+                    <br>
+
+                    This pairing request only establishes a family
+                    connection. Location sharing and other sensitive
+                    features must be separately enabled with the
+                    appropriate device permissions and consent.
+
+                </div>
+
+
+                <div class="action-area">
+
+                    <button
+                        id="generateButton"
+                        class="btn btn-primary"
+                        type="button"
+                    >
+                        Generate Pairing Code
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module">
+
+        import {
+            auth,
+            db
+        } from "../js/firebase-config.js";
+
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+        import {
+            doc,
+            getDoc,
+            setDoc,
+            serverTimestamp,
+            Timestamp
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+        const parentName =
+            document.getElementById("parentName");
+
+        const parentEmail =
+            document.getElementById("parentEmail");
+
+        const parentAvatar =
+            document.getElementById("parentAvatar");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const childSummary =
+            document.getElementById("childSummary");
+
+        const childName =
+            document.getElementById("childName");
+
+        const childAge =
+            document.getElementById("childAge");
+
+        const childAvatar =
+            document.getElementById("childAvatar");
+
+        const generateButton =
+            document.getElementById("generateButton");
+
+        const codeSection =
+            document.getElementById("codeSection");
+
+        const pairCode =
+            document.getElementById("pairCode");
+
+        const expiresText =
+            document.getElementById("expiresText");
+
+        const message =
+            document.getElementById("message");
+
+
+        let currentUser = null;
+        let selectedChild = null;
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const childId =
+            params.get("id");
+
+
+        /* =========================================
+           AUTH
+        ========================================== */
+
+        onAuthStateChanged(
+            auth,
+            async function(user) {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                currentUser =
+                    user;
+
+
+                parentName.textContent =
+                    user.displayName ||
+                    "Parent";
+
+                parentEmail.textContent =
+                    user.email ||
+                    "";
+
+                parentAvatar.textContent =
+                    (
+                        user.displayName ||
+                        "P"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
+
+
+                if (!childId) {
+
+                    showMessage(
+                        "No child was selected for pairing.",
+                        "error"
+                    );
+
+                    generateButton.disabled =
+                        true;
+
+                    return;
+
+                }
+
+
+                await loadChild();
+
+            }
+        );
+
+
+        /* =========================================
+           LOAD CHILD
+        ========================================== */
+
+        async function loadChild() {
+
+            try {
+
+                const childRef =
+                    doc(
+                        db,
+                        "parents",
+                        currentUser.uid,
+                        "children",
+                        childId
+                    );
+
+
+                const snapshot =
+                    await getDoc(childRef);
+
+
+                if (!snapshot.exists()) {
+
+                    showMessage(
+                        "The selected child profile could not be found.",
+                        "error"
+                    );
+
+                    generateButton.disabled =
+                        true;
+
+                    return;
+
+                }
+
+
+                selectedChild =
+                    snapshot.data();
+
+
+                const name =
+                    selectedChild.name ||
+                    "Child";
+
+
+                childName.textContent =
+                    name;
+
+
+                childAge.textContent =
+                    selectedChild.age
+                        ? `${selectedChild.age} years old`
+                        : "Age not specified";
+
+
+                childAvatar.textContent =
+                    name
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                childSummary.style.display =
+                    "flex";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Load child error:",
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to load the child profile. Please try again.",
+                    "error"
+                );
+
+                generateButton.disabled =
+                    true;
+
+            }
+
+        }
+
+
+        /* =========================================
+           GENERATE CODE
+        ========================================== */
+
+        generateButton.addEventListener(
+            "click",
+            async function() {
+
+                if (
+                    !currentUser ||
+                    !selectedChild ||
+                    !childId
+                ) {
+
+                    return;
+
+                }
+
+
+                generateButton.disabled =
+                    true;
+
+                generateButton.textContent =
+                    "Generating...";
+
+
+                try {
+
+                    const code =
+                        generatePairingCode();
+
+
+                    const expiresAt =
+                        new Date(
+                            Date.now() +
+                            (10 * 60 * 1000)
+                        );
+
+
+                    const pairingRef =
+                        doc(
+                            db,
+                            "pairingCodes",
+                            code
+                        );
+
+
+                    await setDoc(
+                        pairingRef,
+                        {
+
+                            code:
+                                code,
+
+                            parentUid:
+                                currentUser.uid,
+
+                            childId:
+                                childId,
+
+                            status:
+                                "pending",
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            expiresAt:
+                                Timestamp.fromDate(
+                                    expiresAt
+                                )
+
+                        }
+                    );
+
+
+                    pairCode.textContent =
+                        code;
+
+
+                    expiresText.textContent =
+                        "Expires in 10 minutes";
+
+
+                    codeSection.classList.add(
+                        "active"
+                    );
+
+
+                    showMessage(
+                        "Pairing code created successfully.",
+                        "success"
+                    );
+
+
+                    generateButton.textContent =
+                        "Generate New Code";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Pairing code error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Unable to generate the pairing code. Check your Firestore rules.",
+                        "error"
+                    );
+
+
+                    generateButton.textContent =
+                        "Generate Pairing Code";
+
+                } finally {
+
+                    generateButton.disabled =
+                        false;
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           RANDOM CODE
+        ========================================== */
+
+        function generatePairingCode() {
+
+            const characters =
+                "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+            const array =
+                new Uint32Array(6);
+
+
+            crypto.getRandomValues(
+                array
+            );
+
+
+            let code = "";
+
+
+            for (
+                let i = 0;
+                i < array.length;
+                i++
+            ) {
+
+                code +=
+                    characters[
+                        array[i] %
+                        characters.length
+                    ];
+
+            }
+
+
+            return code;
+
+        }
+
+
+        /* =========================================
+           MESSAGE
+        ========================================== */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                `message show ${type}`;
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================== */
+
+        logoutButton.addEventListener(
+            "click",
+            async function() {
+
+                logoutButton.disabled =
+                    true;
+
+                logoutButton.textContent =
+                    "Signing Out...";
+
+
+                try {
+
+                    await signOut(
+                        auth
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Logout error:",
+                        error
+                    );
+
+                    logoutButton.disabled =
+                        false;
+
+                    logoutButton.textContent =
+                        "Sign Out";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
